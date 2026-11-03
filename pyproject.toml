@@ -1,0 +1,8 @@
+[project]
+name = "qnx-buildlint"
+version = "0.1.0"
+description = "Lint and explain QNX OS 8.0 image buildfiles before mkifs runs"
+requires-python = ">=3.9"
+license = {text = "Apache-2.0"}
+[project.scripts]
+buildlint = "buildlint.__main__:main"
