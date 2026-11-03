@@ -1,0 +1,20 @@
+# Minimal QNX 8.0 image for a Raspberry Pi 4
+[virtual=aarch64le,raw] .bootstrap = {
+    startup-bcm2711-rpi4 -v
+    PATH=/proc/boot procnto-smp-instr -v
+}
+[+script] .script = {
+    procmgr_symlink /dev/shmem /tmp
+    slogger2 &
+    pipe &
+    devc-serminiuart -b115200 -c500000000 -e -F -u1 0xfe215000,125 &
+    waitfor /dev/ser1 4
+    reopen /dev/ser1
+    [+session] ksh &
+}
+[perms=0755] ksh
+[type=link] /bin/sh=/proc/boot/ksh
+[perms=0755] /etc/rc.sh = {
+#!/bin/sh
+echo hello from qnx
+}
