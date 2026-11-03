@@ -1,0 +1,8 @@
+[virtual=aarch64le] .bootstrap = {
+    startup-bcm2711-rpi4 -v
+}
+[perms=0999 uid=root colour=red] ksh
+ksh
+[type=link] /bin/sh=
+/etc/motd = {
+hello
